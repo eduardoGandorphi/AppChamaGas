@@ -30,8 +30,11 @@ namespace AppChamaGas.Views
             var serv = new Base_Services();
             try
             {
-                var cep_md = await serv.Get<Cep_MD>(usuario.Email);
-                await DisplayAlert("Cep", $"{cep_md.Cep}\n{cep_md.Logradouro}\n{cep_md.Complemento}\n{cep_md.Bairro}\n{cep_md.Uf}\n{cep_md.Unidade}\n{cep_md.Ibge}\n{cep_md.Gia}", "OK");
+                //var cep_md = await serv.Get<Cep_MD>(usuario.Email);
+                //await DisplayAlert("Cep", $"{cep_md.Cep}\n{cep_md.Logradouro}\n{cep_md.Complemento}\n{cep_md.Bairro}\n{cep_md.Uf}\n{cep_md.Unidade}\n{cep_md.Ibge}\n{cep_md.Gia}", "OK");
+
+                var User_MD = await serv.Post<User_MD>(new User_MD { Name = "joao", Job="programmer"});
+                await DisplayAlert("retorno", $"{User_MD.Id}\n{User_MD.Name}\n{User_MD.Job}\n{User_MD.CreatedAt.ToString("dd/MM/yyyy")}", "OK");
             }
             catch (Exception e)
             {
