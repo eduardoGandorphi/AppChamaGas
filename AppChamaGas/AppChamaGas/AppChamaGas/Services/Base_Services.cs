@@ -55,5 +55,18 @@ namespace AppChamaGas.Services
 
             return md;
         }
+
+        public async Task<T> Put<T>(T model)
+        {
+            var cliente = GetClient();
+            var body = GetBody(model);
+
+            var response = await cliente.PutAsync("", body);
+
+            var retornoTexto = await response.Content.ReadAsStringAsync();
+            var md = JsonConvert.DeserializeObject<T>(retornoTexto);
+
+            return md;
+        }
     }
 }
