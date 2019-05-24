@@ -12,7 +12,7 @@
                    Text="{Binding Senha}"/>
             <Button x:Name="btnEntrar"
                     Text="Entrar"
-                    Clicked="BtnEntrar_Clicked"/>
+                    Clicked="BtnEntrar_Clicked"/>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

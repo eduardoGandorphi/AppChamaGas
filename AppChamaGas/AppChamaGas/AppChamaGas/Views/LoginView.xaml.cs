@@ -1,4 +1,5 @@
 ﻿using AppChamaGas.Models;
+using AppChamaGas.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,25 @@ namespace AppChamaGas.Views
 		{
 			InitializeComponent ();
             usuario = new Usuario();
-            usuario.Email = "teste@teste.com.br";
+            usuario.Email = "15014040";
             this.BindingContext = usuario;
 
 		}
 
-        private void BtnEntrar_Clicked(object sender, EventArgs e)
+        private async void BtnEntrar_Clicked(object sender, EventArgs args)
         {
-            DisplayAlert("Informações", $"E-mail:{ usuario.Email } Senha { usuario.Senha }", "Fechar");
+            //DisplayAlert("Informações", $"E-mail:{ usuario.Email } Senha { usuario.Senha }", "Fechar");
+            var serv = new Base_Services();
+            try
+            {
+                var cep_md = await serv.Get<Cep_MD>(usuario.Email);
+                await DisplayAlert("Cep", $"{cep_md.Cep}\n{cep_md.Logradouro}\n{cep_md.Complemento}\n{cep_md.Bairro}\n{cep_md.Uf}\n{cep_md.Unidade}\n{cep_md.Ibge}\n{cep_md.Gia}", "OK");
+            }
+            catch (Exception e)
+            {
+                await DisplayAlert("Erro",e.Message,"OK");
+            }
+            
         }
     }
 }

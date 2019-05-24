@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/AppChamaGas/.vs/AppChamaGas/v15/Server/sqlite3
+/AppChamaGas/AppChamaGas/AppChamaGas/bin/Debug/netstandard2.0
+/AppChamaGas/AppChamaGas/AppChamaGas/obj
+/AppChamaGas/AppChamaGas/AppChamaGas.Android/bin/Debug
+/AppChamaGas/AppChamaGas/AppChamaGas.Android/obj
+/AppChamaGas/AppChamaGas/AppChamaGas.iOS/obj/iPhoneSimulator/Debug
+/AppChamaGas/AppChamaGas/AppChamaGas.UWP/obj
