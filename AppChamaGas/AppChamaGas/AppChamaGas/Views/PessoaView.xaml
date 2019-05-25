@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppChamaGas.Views.PessoaView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Pessoa"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout>            
+            <TableView >
+                <TableRoot Title="Pessoa">
+                    <TableSection>
+                        <ViewCell>
+                            <Entry x:Name="etCep" Placeholder="cep" Unfocused="EtCep_Unfocused"></Entry> 
+                        </ViewCell>
+                        <EntryCell x:Name="etLogradouro" Placeholder="Logradouro"/>
+                        <EntryCell x:Name="etComplemento" Placeholder="Complemento"/>
+                        <EntryCell x:Name="etBairro" Placeholder="Bairro"/>
+                        <EntryCell x:Name="etLocalidade" Placeholder="Localidade"/>
+                        <EntryCell x:Name="etUf" Placeholder="Uf"/>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
