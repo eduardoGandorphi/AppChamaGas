@@ -4,9 +4,7 @@
              x:Class="AppChamaGas.Views.HomeView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Home"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image x:Name="mImage"></Image>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

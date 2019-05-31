@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppChamaGas.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,15 @@ namespace AppChamaGas.Views
 	public partial class HomeView : ContentPage
 	{
 		public HomeView ()
-		{
-			InitializeComponent ();
-		}
-	}
+        {
+            InitializeComponent();
+
+        }
+
+        private async Task tiraFoto()
+        {
+            var foto = await Foto.ChamaCamera();
+            mImage.Source = foto;
+        }
+    }
 }
