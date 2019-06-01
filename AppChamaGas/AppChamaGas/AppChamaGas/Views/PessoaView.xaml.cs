@@ -15,8 +15,13 @@ namespace AppChamaGas.Views
     public partial class PessoaView : ContentPage
     {
         Base_Service client_cep = new Base_Service(Base_Service.URL_VIACEP);
-        ReqRes_Service client_ReqRes = new ReqRes_Service("users");
+        ReqRes_Service client_ReqRes_user = new ReqRes_Service("users");
+        ReqRes_Service client_ReqRes_register = 
+            new ReqRes_Service("register");
+        
         //      Base_Service client_api = new Base_Service(Base_Service.URL_MINHAAPI);
+        User_ReqRes md = new User_ReqRes();
+
         public PessoaView()
         {
             InitializeComponent();
@@ -36,7 +41,31 @@ namespace AppChamaGas.Views
 
             //var pessoa_ret = await client_api.get<Pessoa>("");
             //this.etPessoaNome.Text = pessoa_ret.Nome;
-            await client_ReqRes.Get<RetornoTeste>("2");
+            await client_ReqRes_user.Get<RetornoTeste>("2");
+
+            md.name = cep_ret.Bairro;
+            md.job = cep_ret.Localidade;
+
+            var retornoPost = await client_ReqRes_user.Post(md);
+
+            this.etUf.Text = $"{retornoPost.createdAt} {retornoPost.id}";
+
+            await this.DisplayAlert("meu retorno",
+                $"{retornoPost.createdAt} {retornoPost.id}",
+                "Entendi");
+
+            var usuarioEntrada = new Usuario
+            {
+                email="joao@senac.com.br",
+                password = "123"
+            };
+            var usuarioSaida = await client_ReqRes_register
+                .Post<Usuario, Usuario>(usuarioEntrada);
+
+            await this.DisplayAlert("usuarioSaida",
+                $"{usuarioSaida.token}",
+                "Entendi");
+
         }
     }
 }

@@ -18,14 +18,14 @@ namespace AppChamaGas.Views
 		{
 			InitializeComponent ();
             usuario = new Usuario();
-            usuario.Email = "teste@teste.com.br";
+            usuario.email = "teste@teste.com.br";
             this.BindingContext = usuario;
 
 		}
 
         private void BtnEntrar_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Informações", $"E-mail:{ usuario.Email } Senha { usuario.Senha }", "Fechar");
+            DisplayAlert("Informações", $"E-mail:{ usuario.email } Senha { usuario.Senha }", "Fechar");
         }
     }
 }
