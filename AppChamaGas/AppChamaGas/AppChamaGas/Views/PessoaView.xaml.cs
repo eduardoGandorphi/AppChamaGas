@@ -56,15 +56,32 @@ namespace AppChamaGas.Views
 
             var usuarioEntrada = new Usuario
             {
-                email="joao@senac.com.br",
-                password = "123"
+                email= "Xeve.holt@reqres.in",
+                password = "pistol"
             };
-            var usuarioSaida = await client_ReqRes_register
+
+
+            try
+            {
+                var usuarioSaida = await client_ReqRes_register
                 .Post<Usuario, Usuario>(usuarioEntrada);
 
-            await this.DisplayAlert("usuarioSaida",
-                $"{usuarioSaida.token}",
-                "Entendi");
+                await this.DisplayAlert("usuarioSaida",
+                    $"{usuarioSaida.token}",
+                    "Entendi");
+
+                var usuarioPut = await client_ReqRes_register
+               .Post<Usuario, Usuario>(usuarioEntrada);
+
+                await this.DisplayAlert("usuarioSaida",
+                    $"{usuarioPut.token}",
+                    "Entendi");
+            }
+            catch (Exception ex)
+            {
+                await this.DisplayAlert("Erro", ex.Message, "OK");
+            }
+           
 
         }
     }
