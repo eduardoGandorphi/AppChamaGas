@@ -1,5 +1,6 @@
 ﻿using AppChamaGas.Models;
 using AppChamaGas.Services;
+using AppChamaGas.Services.Azure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,10 @@ namespace AppChamaGas.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PessoaView : ContentPage
     {
+        //Servicos do Azure
+        PessoaAzureService pessoaAzureServico;
+        Pessoa pessoa;
+       
         Base_Service client_cep = new Base_Service(Base_Service.URL_VIACEP);
         ReqRes_Service client_ReqRes_user = new ReqRes_Service("users");
         ReqRes_Service client_ReqRes_register = 
@@ -25,11 +30,13 @@ namespace AppChamaGas.Views
         public PessoaView()
         {
             InitializeComponent();
+            pessoaAzureServico = new PessoaAzureService();
+            pessoa = new Pessoa();
+            ListarTipo();
         }
 
         private async void EtCep_Unfocused(object sender, FocusEventArgs e)
         {
-
             var cep_ret = await client_cep.Get<CEP>(etCep.Text);
 
             this.etCep.Text = cep_ret.cep;
@@ -80,9 +87,57 @@ namespace AppChamaGas.Views
             catch (Exception ex)
             {
                 await this.DisplayAlert("Erro", ex.Message, "OK");
-            }
-           
+            }           
 
+        }
+
+        private async void BtnSalvar_Clicked(object sender, EventArgs e)
+        {
+            var resultado = await SalvarAsync();
+            if (resultado)
+            {
+                await DisplayAlert("Confirma", "Registro salvo com sucesso", "Fechar");
+            }
+            else
+            {
+                await DisplayAlert("Atenção", "Não foi possivel salvar o registro", "Fechar");
+            }
+            
+        }
+
+        private async Task<bool> SalvarAsync()
+        {
+            pessoa = new Pessoa();
+            pessoa.Id = "";
+            pessoa.RazaoSocial = etRazaoSocia.Text;
+            pessoa.Tipo = picTipo.SelectedItem.ToString();
+            pessoa.Endereco = etLogradouro.Text;
+            pessoa.Numero = etNumero.Text;
+            pessoa.Bairro = etBairro.Text;
+            pessoa.Cep = etCep.Text;
+            pessoa.Cidade = etLocalidade.Text;
+            pessoa.Uf = etUf.Text;
+            pessoa.Telefone = etTelefone.Text;
+            pessoa.Email = etEmail.Text;
+            pessoa.Senha = etSenha.Text;
+                        
+            if (string.IsNullOrWhiteSpace(pessoa.Id))
+            {
+                return await pessoaAzureServico.IncluirAsync(pessoa);
+            }
+            else
+            {
+                return await pessoaAzureServico.AlterarAsync(pessoa);
+            }
+        }
+
+        private void ListarTipo()
+        {
+            List<string> tipos = new List<string>();
+            tipos.Add("Consumidor");
+            tipos.Add("Distribuidor");
+            picTipo.ItemsSource = tipos;
+            picTipo.SelectedIndex = 0;
         }
     }
 }
