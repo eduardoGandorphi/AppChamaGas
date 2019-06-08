@@ -1,4 +1,5 @@
-﻿using AppChamaGas.Views;
+﻿using AppChamaGas.Helpers;
+using AppChamaGas.Views;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,8 +14,9 @@ namespace AppChamaGas
         public App()
         {
             InitializeComponent();
+            Conexao.Initialize();
             //Habilita a pagina principal
-            MainPage = new MasterView();
+            MainPage = new CameraView();//new MasterView();
         }
 
         protected override void OnStart()

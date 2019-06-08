@@ -9,6 +9,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Linq;
+using AppChamaGas.Extensions;
 
 namespace AppChamaGas.Views
 {
@@ -24,7 +25,8 @@ namespace AppChamaGas.Views
         protected async override void OnAppearing()
         {
             var mPosition = new Location(-20.8141467, -49.3758587);
-
+            var str = "azul";
+            
             List<Pessoa> fornecedores = (List<Pessoa>)
                 await pessoa_service.List(etBusca.Text);
 
