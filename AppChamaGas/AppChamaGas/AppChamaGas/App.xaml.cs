@@ -16,7 +16,8 @@ namespace AppChamaGas
             InitializeComponent();
             Conexao.Initialize();
             //Habilita a pagina principal
-            MainPage = new CameraView();//new MasterView();
+            //MainPage = new CameraView();//new MasterView();
+            MainPage = new MasterView();
         }
 
         protected override void OnStart()

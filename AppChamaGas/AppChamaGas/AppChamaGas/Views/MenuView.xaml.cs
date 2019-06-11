@@ -39,9 +39,9 @@ namespace AppChamaGas.Views
             });
             paginas.Add(new Pagina
             {
-                Titulo = "Pessoa",
+                Titulo = "Usuarios",
                 Icone = "",
-                PaginaView = typeof(PessoaView)
+                PaginaView = typeof(UsuarioView)
             });
 
             lvMenu.ItemsSource = paginas;
