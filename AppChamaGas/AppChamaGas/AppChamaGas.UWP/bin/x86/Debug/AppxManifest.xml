@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="916d0469-68e2-4523-a9f5-fa1e34f7d806" Publisher="CN=6072211c-2a83-4853-a0b4-a1fe31c97923" Version="1.0.0.0" ProcessorArchitecture="x86" />
+  <Identity Name="916d0469-68e2-4523-a9f5-fa1e34f7d809" Publisher="CN=6072211c-2a83-4853-a0b4-a1fe31c97923" Version="1.0.0.0" ProcessorArchitecture="x86" />
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>AppChamaGas.UWP</DisplayName>
@@ -37,6 +37,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <DeviceCapability Name="webcam" />
   </Capabilities>
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />

@@ -3,50 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppChamaGas.Views.PessoaView">
     <ContentPage.Content>
-        <StackLayout>            
+        <StackLayout>
             <TableView >
                 <TableRoot Title="Pessoa">
-                    <TableSection Title="Pessoais">
-                        <ViewCell>
-                            <StackLayout>
-                                <Image x:Name="imgFoto"/>
-                                <Picker x:Name="picTipo"/>
-                                <Entry x:Name="etRazaoSocia"
-                                       Placeholder="Razão Social"/>                               
-                            </StackLayout>
-                        </ViewCell>
+                    <TableSection Title="Dados pessoais">
+                        <TextCell x:Name="lblId" 
+                                  Text="{Binding Id}"/>
+                        <ImageCell x:Name="imgFoto" 
+                                   ImageSource="{Binding Foto}"/>
+                        <EntryCell x:Name="etRazaoSocial" 
+                                   Placeholder="Nome ou Razão Social" 
+                                   Text="{Binding RazaoSocial}"/>
+                        <EntryCell x:Name="etTelefone" 
+                                   Placeholder="Telefone"
+                                   Text="{Binding Telefone}"/>
                     </TableSection>
-                    <TableSection Title="Endereço">
+                    <TableSection Title="Dados endereço">
                         <ViewCell>
-                            <Entry x:Name="etCep" Placeholder="cep" Unfocused="EtCep_Unfocused"></Entry>
+                            <Entry x:Name="etCep" 
+                                   Placeholder="cep" 
+                                   Unfocused="EtCep_Unfocused"
+                                   Text="{Binding Cep}"/>
                         </ViewCell>
-                        <EntryCell x:Name="etLogradouro" Placeholder="Logradouro"/>
-                        <ViewCell>
-                            <Entry x:Name="etNumero"
-                                   Placeholder="Numero"/>
-                        </ViewCell>
-                        <EntryCell x:Name="etComplemento" Placeholder="Complemento"/>
-                        <EntryCell x:Name="etBairro" Placeholder="Bairro"/>
-                        <EntryCell x:Name="etLocalidade" Placeholder="Localidade"/>
-                        <EntryCell x:Name="etUf" Placeholder="Uf"/>
+                        <EntryCell x:Name="etLogradouro" 
+                                   Placeholder="Logradouro"
+                                   Text="{Binding Endereco}"/>
+                        <EntryCell x:Name="etNumero" 
+                                   Placeholder="Numero"
+                                   Text="{Binding Numero}"/>
+                        <EntryCell x:Name="etComplemento" 
+                                   Placeholder="Complemento"/>
+                        <EntryCell x:Name="etBairro" 
+                                   Placeholder="Bairro"
+                                   Text="{Binding Bairro}"/>
+                        <EntryCell x:Name="etLocalidade" 
+                                   Placeholder="Localidade"
+                                   Text="{Binding Cidade}"/>
+                        <EntryCell x:Name="etUf" 
+                                   Placeholder="Uf"
+                                   Text="{Binding Uf}"/>
                     </TableSection>
-                    <TableSection Title="Usuário">
+                    <TableSection Title="Dados usuário">
                         <ViewCell>
-                            <StackLayout>
-                                <Entry x:Name="etTelefone"
-                                       Placeholder="Telefone"/>
-                                <Entry x:Name="etEmail"
-                                       Placeholder="E-mail"/>
-                                <Entry x:Name="etSenha"
-                                       Placeholder="Senha"/>
-                            </StackLayout>
+                            <Picker x:Name="picTipo"
+                                    SelectedItem="{Binding Tipo}"/>
+                        </ViewCell>
+                        <EntryCell x:Name="etEmail" 
+                                   Placeholder="E-mail"
+                                   Text="{Binding Email}"/>
+                        <EntryCell x:Name="etSenha" 
+                                   Placeholder="Senha"
+                                   Text="{Binding Senha}"/>
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <Button x:Name="btnSalvar"
+                                    Text="Salvar"
+                                    Clicked="BtnSalvar_Clicked"/>
                         </ViewCell>
                     </TableSection>
                 </TableRoot>
             </TableView>
-            <Button x:Name="btnSalvar"
-                    Text="Salvar"
-                    Clicked="BtnSalvar_Clicked"/>
+            <ActivityIndicator x:Name="vCarregando"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               IsVisible="False"
+                               IsEnabled="True"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

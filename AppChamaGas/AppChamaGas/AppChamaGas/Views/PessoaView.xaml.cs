@@ -27,11 +27,17 @@ namespace AppChamaGas.Views
         //      Base_Service client_api = new Base_Service(Base_Service.URL_MINHAAPI);
         User_ReqRes md = new User_ReqRes();
 
-        public PessoaView()
+        //Metodo construtor vai receber como parametro uma pessoa
+        public PessoaView(Pessoa usuario=null)
         {
             InitializeComponent();
             pessoaAzureServico = new PessoaAzureService();
-            pessoa = new Pessoa();
+            if (usuario == null)
+            {
+                usuario = new Pessoa();
+            }
+            pessoa = usuario;
+            this.BindingContext = pessoa;
             ListarTipo();
         }
 
@@ -93,23 +99,27 @@ namespace AppChamaGas.Views
 
         private async void BtnSalvar_Clicked(object sender, EventArgs e)
         {
+            vCarregando.IsVisible = true;
+            vCarregando.IsRunning = true;
             var resultado = await SalvarAsync();
             if (resultado)
             {
                 await DisplayAlert("Confirma", "Registro salvo com sucesso", "Fechar");
+                await MasterView.NavegacaoMasterDetail.Detail.Navigation.PopAsync();
             }
             else
             {
                 await DisplayAlert("Atenção", "Não foi possivel salvar o registro", "Fechar");
             }
-            
+            vCarregando.IsVisible = false;
+            vCarregando.IsRunning = false;            
         }
 
         private async Task<bool> SalvarAsync()
         {
             pessoa = new Pessoa();
-            pessoa.Id = "";
-            pessoa.RazaoSocial = etRazaoSocia.Text;
+            pessoa.Id = lblId.Text;
+            pessoa.RazaoSocial = etRazaoSocial.Text;
             pessoa.Tipo = picTipo.SelectedItem.ToString();
             pessoa.Endereco = etLogradouro.Text;
             pessoa.Numero = etNumero.Text;
@@ -120,7 +130,7 @@ namespace AppChamaGas.Views
             pessoa.Telefone = etTelefone.Text;
             pessoa.Email = etEmail.Text;
             pessoa.Senha = etSenha.Text;
-                        
+
             if (string.IsNullOrWhiteSpace(pessoa.Id))
             {
                 return await pessoaAzureServico.IncluirAsync(pessoa);
