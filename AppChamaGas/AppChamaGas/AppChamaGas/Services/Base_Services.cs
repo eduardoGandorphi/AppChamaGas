@@ -25,11 +25,6 @@ namespace AppChamaGas.Services
             return client;
         }
 
-        private StringContent GetBody<T>(T model)
-        {
-            var json_string = JsonConvert.SerializeObject(model);
-            return new StringContent(json_string, Encoding.UTF8, "application/json");
-        }
 
         public async Task<T> Get<T>(string parametro)
         {
@@ -42,6 +37,13 @@ namespace AppChamaGas.Services
 
             return md;
         }
+
+        private StringContent GetBody<T>(T model)
+        {
+            var json_string = JsonConvert.SerializeObject(model);
+            return new StringContent(json_string, Encoding.UTF8, "application/json");
+        }
+
 
         public async Task<T> Post<T>(T model)
         {

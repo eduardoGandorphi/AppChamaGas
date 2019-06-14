@@ -12,7 +12,7 @@ namespace AppChamaGas.Helpers
     {
         public static async Task<ImageSource> ChamaCamera()
         {
-            await CrossMedia.Current.Initialize();
+            //await CrossMedia.Current.Initialize();
 
             if (CrossMedia.Current.IsPickPhotoSupported && CrossMedia.Current.IsTakePhotoSupported)
             {
@@ -35,6 +35,7 @@ namespace AppChamaGas.Helpers
                     DefaultCamera = CameraDevice.Front
                 });
 
+                //var file = await CrossMedia.Current.PickPhotoAsync();
                 return ImageSource.FromStream(file.GetStream);
             }
             else
