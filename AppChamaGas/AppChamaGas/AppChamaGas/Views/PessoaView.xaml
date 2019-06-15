@@ -2,15 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppChamaGas.Views.PessoaView">
-    <ContentPage.Content>
+    <ContentPage.Content>       
+        
         <StackLayout>
-            <TableView >
+            
+            <TableView HasUnevenRows="True">
                 <TableRoot Title="Pessoa">
                     <TableSection Title="Dados pessoais">
                         <TextCell x:Name="lblId" 
                                   Text="{Binding Id}"/>
-                        <ImageCell x:Name="imgFoto" 
-                                   ImageSource="{Binding Foto}"/>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="Foto:"></Label>
+                                <Button IsVisible="{Binding BotaoVisivel}" Text="tirar Foto" Command="{Binding TiraFotoCommand}"/>
+                                <Image HeightRequest="200" IsVisible="{Binding  ImageVisivel}" x:Name="imgFoto"   Source="{Binding Foto}" Aspect="Fill"/>
+                            </StackLayout>
+                        </ViewCell>
                         <EntryCell x:Name="etRazaoSocial" 
                                    Placeholder="Nome ou Razão Social" 
                                    Text="{Binding RazaoSocial}"/>

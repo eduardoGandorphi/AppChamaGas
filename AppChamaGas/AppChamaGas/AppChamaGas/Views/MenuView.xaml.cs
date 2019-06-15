@@ -57,9 +57,16 @@ namespace AppChamaGas.Views
                 //Inicia a navegacao
                 MasterView.NavegacaoMasterDetail.IsPresented = false;
                 MasterView.NavegacaoMasterDetail.Detail.Navigation.PopToRootAsync();
-                
+
+                Page paginaView = null;
                 //Cria a pagina view 
-                Page paginaView = Activator.CreateInstance(pagina.PaginaView) as Page;
+                if (pagina.PaginaView == typeof(PessoaView))
+                    paginaView = new PessoaView(new Pessoa());
+                else if (pagina.PaginaView == typeof(CameraView))
+                    paginaView = new CameraView();
+                else
+                    paginaView = Activator.CreateInstance(pagina.PaginaView) as Page;
+
                 //Navega para a pagina view
                 MasterView.NavegacaoMasterDetail.Detail.Navigation.PushAsync(paginaView);
                 //Desativa o item selecionado
