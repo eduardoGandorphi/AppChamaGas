@@ -1,4 +1,5 @@
-﻿using AppChamaGas.Models;
+﻿using AppChamaGas.Helpers;
+using AppChamaGas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,32 +29,36 @@ namespace AppChamaGas.Views
             paginas.Add(new Pagina
             {
                 Titulo = "Pessoa",
-                Icone = "",
+                Icone = Font_Index.user,
                 PaginaView = typeof(PessoaView)
             });
             paginas.Add(new Pagina
             {
                 Titulo = "Login",
-                Icone = "",
+                Icone = Font_Index.key,
                 PaginaView = typeof(LoginView)
             });
             paginas.Add(new Pagina
             {
                 Titulo = "Usuarios",
-                Icone = "",
+                Icone = Font_Index.users,
                 PaginaView = typeof(UsuarioView)
             });
 
             lvMenu.ItemsSource = paginas;
         }
 
-        private void LvMenu_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void LvMenu_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            foreach (Pagina item in lvMenu.ItemsSource)            
+                item.CorLetra = Color.Gray;
+            
             //Seleciona a pagina
-            var pagina = e.SelectedItem as Pagina;
+            var pagina = e.Item as Pagina;
             //Verifica se existe a pagina
             if (pagina != null)
             {
+                pagina.CorLetra = Color.Black;
                 //Inicia a navegacao
                 MasterView.NavegacaoMasterDetail.IsPresented = false;
                 MasterView.NavegacaoMasterDetail.Detail.Navigation.PopToRootAsync();

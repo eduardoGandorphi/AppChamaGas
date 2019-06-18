@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Linq;
 using AppChamaGas.Extensions;
+using AppChamaGas.Helpers;
 
 namespace AppChamaGas.Views
 {
@@ -20,7 +21,9 @@ namespace AppChamaGas.Views
 		public HomeView ()
 		{
 			InitializeComponent ();
-		}
+            meuIcone.Text = Font_Index.home;
+
+        }
 
         protected async override void OnAppearing()
         {
@@ -55,6 +58,11 @@ namespace AppChamaGas.Views
                     Name = "Localização Maneira",
                     NavigationMode = NavigationMode.Driving,
                 });
+        }
+
+        private void Icon_Tapped(object sender, EventArgs e)
+        {
+            this.DisplayAlert("Aviso", "Era uma label, mas pode ser clicado também!", "Ok");
         }
     }
 }
