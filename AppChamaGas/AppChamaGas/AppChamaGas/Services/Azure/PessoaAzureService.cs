@@ -5,11 +5,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace AppChamaGas.Services.Azure
 {
     public class PessoaAzureService : AzureService<Pessoa>
-    {      
+    {    
+        //Regras de negocio no banco dados
+        //Autenticacao de usuário
+        public async Task<Pessoa> AutenticarUsuarioAsync(string email, string senha)
+        {
+            try
+            {
+                //Lista a tabela pessoas
+                var pessoas = await this.ListarAsync();
+                //Faz a consulta especifica do usuario na tabela
+                return pessoas.FirstOrDefault(p => p.Email == email && p.Senha == senha);
+            }
+            catch (Exception erro)
+            {
+                Debug.WriteLine(erro);
+                return null;                
+            }           
+        }
+
 
         public async Task<IEnumerable<Pessoa>> List(string busca)
         {
@@ -35,7 +54,7 @@ namespace AppChamaGas.Services.Azure
                 Longitude = -49.3865877,
                 Latitude = -20.822495,
             });
-            
+
             listaRetorno.Add(new Pessoa
             {
                 RazaoSocial = "Habbis",

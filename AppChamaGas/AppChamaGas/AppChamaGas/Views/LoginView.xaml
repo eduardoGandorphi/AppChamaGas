@@ -3,16 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppChamaGas.Views.LoginView">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="Center">
+            <Image Source="https://www.searchpng.com/wp-content/uploads/2018/12/Fire-Flame-Png-Image.png"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
             <Label Text="Entre com sua identificação de usuário"/>
-            <Entry Placeholder="E-mail"
+            <Entry x:Name="vEmail" 
+                   Placeholder="E-mail"
                    Text="{Binding Email}"/>
-            <Entry Placeholder="Senha" 
+            <Entry x:Name="vSenha"
+                   Placeholder="Senha" 
                    IsPassword="True"
                    Text="{Binding Senha}"/>
+            <Label x:Name="vErro"
+                   IsVisible="False"
+                   TextColor="Red"
+                   VerticalTextAlignment="Center"/>
             <Button x:Name="btnEntrar"
                     Text="Entrar"
                     Clicked="BtnEntrar_Clicked"/>
+            <Button x:Name="btnRegistrar"
+                    Text="Registrar-se"
+                    Clicked="BtnRegistrar_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
