@@ -1,5 +1,6 @@
 ﻿using AppChamaGas.Helpers;
 using AppChamaGas.Models;
+using MonkeyCache.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,15 @@ namespace AppChamaGas.Views
 	public partial class MenuView : ContentPage
 	{
         List<Pagina> paginas;
+        //Pessoa pessoaContext;
 
 		public MenuView ()
 		{
 			InitializeComponent ();
+            //var pessoa = Barrel.Current.Get<Pessoa>("pessoa");
+            //if (pessoa != null)
+            //    pessoaContext = pessoa;
+            ExibirPessoa();
             CarregarLista();
 
         }
@@ -78,6 +84,20 @@ namespace AppChamaGas.Views
                 lvMenu.SelectedItem = null;
             }
 
+        }
+
+        private void ExibirPessoa()
+        {
+            var pessoa = Barrel.Current.Get<Pessoa>("pessoa");
+            if (pessoa != null)
+            {
+                vNome.Text = pessoa.RazaoSocial;
+                vEmail.Text = pessoa.Email;
+                Uri uri = new Uri(@"https://picsum.photos/200/300");
+                vFoto.Source = ImageSource.FromUri(uri);
+                //vFoto.Source = ImageSource.FromStream(() =>                    
+                //);
+            }
         }
     }
 }

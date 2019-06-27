@@ -7,6 +7,8 @@
                      HorizontalOptions="Center">
             <Image Source="https://www.searchpng.com/wp-content/uploads/2018/12/Fire-Flame-Png-Image.png"
                    Aspect="AspectFit"
+                   WidthRequest="256"
+                   HeightRequest="256"                   
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>
             <Label Text="Entre com sua identificação de usuário"/>
@@ -27,6 +29,11 @@
             <Button x:Name="btnRegistrar"
                     Text="Registrar-se"
                     Clicked="BtnRegistrar_Clicked"/>
+            <ActivityIndicator x:Name="aiCarregar"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               IsVisible="False"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

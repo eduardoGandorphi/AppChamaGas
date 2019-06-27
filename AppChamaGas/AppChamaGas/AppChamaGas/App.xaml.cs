@@ -1,5 +1,6 @@
 ﻿using AppChamaGas.Helpers;
 using AppChamaGas.Views;
+using MonkeyCache.SQLite;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,6 +19,9 @@ namespace AppChamaGas
             //Habilita a pagina principal
             //MainPage = new CameraView();//new MasterView();
             //MainPage = new MasterView();
+            Barrel.ApplicationId = "ChamaGasCacheBd";
+            //Remove data experidos
+            Barrel.Current.EmptyExpired();
             MainPage = new LoginView();
         }
 
