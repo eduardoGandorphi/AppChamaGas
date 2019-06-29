@@ -34,10 +34,23 @@ namespace AppChamaGas.Views
             paginas = new List<Pagina>();
             paginas.Add(new Pagina
             {
-                Titulo = "Pessoa",
+                Titulo = "Perfil",
                 Icone = Font_Index.user,
                 PaginaView = typeof(PessoaView)
             });
+            paginas.Add(new Pagina
+            {
+                Titulo = "Produtos",
+                Icone = Font_Index.box,
+                PaginaView = typeof(ProdutosView)
+            });
+            paginas.Add(new Pagina
+            {
+                Titulo = "Pedidos",
+                Icone = Font_Index.list,
+                PaginaView = typeof(PedidosView)
+            });
+            /*
             paginas.Add(new Pagina
             {
                 Titulo = "Login",
@@ -50,6 +63,7 @@ namespace AppChamaGas.Views
                 Icone = Font_Index.users,
                 PaginaView = typeof(UsuarioView)
             });
+            */
 
             lvMenu.ItemsSource = paginas;
         }
@@ -67,7 +81,7 @@ namespace AppChamaGas.Views
                 pagina.CorLetra = Color.Black;
                 //Inicia a navegacao
                 MasterView.NavegacaoMasterDetail.IsPresented = false;
-                MasterView.NavegacaoMasterDetail.Detail.Navigation.PopToRootAsync();
+                //MasterView.NavegacaoMasterDetail.Detail.Navigation.PopToRootAsync();
 
                 Page paginaView = null;
                 //Cria a pagina view 
@@ -79,7 +93,8 @@ namespace AppChamaGas.Views
                     paginaView = Activator.CreateInstance(pagina.PaginaView) as Page;
 
                 //Navega para a pagina view
-                MasterView.NavegacaoMasterDetail.Detail.Navigation.PushAsync(paginaView);
+                //MasterView.NavegacaoMasterDetail.Detail.Navigation.PushAsync(paginaView);
+                MasterView.NavegacaoMasterDetail.Detail = new NavigationPage(paginaView);
                 //Desativa o item selecionado
                 lvMenu.SelectedItem = null;
             }

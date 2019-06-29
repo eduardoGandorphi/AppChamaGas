@@ -1,6 +1,7 @@
 ﻿using AppChamaGas.Models;
 using AppChamaGas.Services;
 using AppChamaGas.Services.Azure;
+using MonkeyCache.SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,9 @@ namespace AppChamaGas.Views
         {
             InitializeComponent();
             pessoaAzureServico = new PessoaAzureService();
-            if (usuario == null)
+            if (usuario == null || string.IsNullOrEmpty(usuario.Id))
             {
-                usuario = new Pessoa();
+                usuario = Barrel.Current.Get<Pessoa>("pessoa");
             }
             pessoa = usuario;
             this.BindingContext = pessoa;

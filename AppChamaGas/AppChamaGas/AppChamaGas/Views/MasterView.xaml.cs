@@ -20,11 +20,12 @@ namespace AppChamaGas.Views
 			InitializeComponent ();
             //Configuracao
             //Principal
-            this.Detail = new NavigationPage(new HomeView()
+            this.Detail = new NavigationPage(new ProdutosView(){ Title = "ChamaGas" });
+            /*new NavigationPage(new HomeView()
             {
                 Title = "ChamaGas",
                 Icon =""
-            });
+            });*/
             //Menu
             this.Master = new MenuView()
             {

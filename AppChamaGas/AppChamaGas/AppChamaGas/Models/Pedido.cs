@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace AppChamaGas.Models
 {
@@ -12,7 +13,12 @@ namespace AppChamaGas.Models
         public string FornecedorId { get; set; }
         public DateTime DataEmissao { get; set; }
         public DateTime DataAgenda { get; set; }
-        public DateTime DataEntrega { get; set; }
+        public DateTime DataEntrega { get; set; }        
+
+        [JsonIgnore, SQLite.Ignore]
+        public string ValorTotal { get; set; }
+        [JsonIgnore, SQLite.Ignore]
+        public string NomeFornecedor  { get;set;}
 
         //Metodo construtor
         public Pedido(string clienteId, string fornecedorId)

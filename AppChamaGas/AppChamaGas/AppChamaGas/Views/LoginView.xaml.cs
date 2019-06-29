@@ -21,7 +21,11 @@ namespace AppChamaGas.Views
 		{
 			InitializeComponent ();
             pessoaAzureService = new PessoaAzureService();
-            usuarioContext = new UsuarioModel();            
+            usuarioContext = new UsuarioModel()
+            {
+                Email ="teste@teste.com.br",
+                Senha = "12345678",
+            };           
             this.BindingContext = usuarioContext;
 		}
 
@@ -43,6 +47,7 @@ namespace AppChamaGas.Views
                     //Cache de dados para a pessoa
                     //Salva os dados da pessoa
                     Barrel.Current.Add(key: "pessoa", data: pessoa, expireIn: TimeSpan.FromMinutes(1));
+                    
 
                     //Define a nova mainpage principal
                     App.Current.MainPage = new MasterView();
