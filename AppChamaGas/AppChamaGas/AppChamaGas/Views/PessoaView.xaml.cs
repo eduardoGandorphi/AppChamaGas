@@ -40,6 +40,9 @@ namespace AppChamaGas.Views
             pessoa = usuario;
             this.BindingContext = pessoa;
             ListarTipo();
+
+            imgFoto.Source = pessoa.FotoSource;
+            picTipo.SelectedItem = pessoa.Tipo;
         }
 
         private async void EtCep_Unfocused(object sender, FocusEventArgs e)
@@ -132,12 +135,17 @@ namespace AppChamaGas.Views
             pessoa.Email = etEmail.Text;
             pessoa.Senha = etSenha.Text;
 
+            var pessoa_Bindada = ((Pessoa)this.BindingContext);
+            pessoa.FotoByte = pessoa_Bindada.FotoByte;
+
             if (string.IsNullOrWhiteSpace(pessoa.Id))
             {
                 return await pessoaAzureServico.IncluirAsync(pessoa);
             }
             else
             {
+                Barrel.Current.Empty("pessoa");                
+                Barrel.Current.Add("pessoa", pessoa, TimeSpan.FromMinutes(1));
                 return await pessoaAzureServico.AlterarAsync(pessoa);
             }
         }

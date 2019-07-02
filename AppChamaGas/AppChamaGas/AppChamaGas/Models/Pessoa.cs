@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using AppChamaGas.Extensions;
 
 namespace AppChamaGas.Models
 {
@@ -24,11 +25,43 @@ namespace AppChamaGas.Models
         public string Senha { get; set; }
         public string Telefone { get; set; }
 
+        //byteArray convertido para string
         private string foto;
         public string Foto
         {
             get { return foto; }
             set { SetProperty(ref foto, value); }
+        }
+
+        //byte[]
+        private byte[] fotoByte;
+        [JsonIgnore]
+        public byte[] FotoByte
+        {
+            get
+            {
+                if (fotoByte == null && Foto != null)
+                    FotoByte = Convert.FromBase64String(Foto);
+                return fotoByte;
+            }
+            set
+            {
+                SetProperty(ref fotoByte, value);
+                if (value != null)
+                {
+                    FotoSource = value.ToImageSource();
+                    Foto = Convert.ToBase64String(value);
+                }
+            }
+        }
+
+        //imageSource
+        private ImageSource fotoSource;
+        [JsonIgnore]
+        public ImageSource FotoSource
+        {
+            get { return fotoSource; }
+            set { SetProperty(ref fotoSource, value); }
         }
 
         public double Latitude { get; set; }
@@ -43,7 +76,7 @@ namespace AppChamaGas.Models
         public bool BotaoVisivel
         {
             get { return botaoVisivel; }
-            set { SetProperty(ref botaoVisivel , value); }
+            set { SetProperty(ref botaoVisivel, value); }
         }
 
         private bool imageVisivel;
@@ -76,7 +109,7 @@ namespace AppChamaGas.Models
             BotaoVisivel = false;
             ImageVisivel = true;
 
-            this.Foto = md.PathGaleria;
+            this.FotoByte = md.fotoArray;
 
         }
 

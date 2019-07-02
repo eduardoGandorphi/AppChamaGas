@@ -20,9 +20,9 @@ namespace AppChamaGas.Helpers
                 Name = nomeFoto,
                 Directory = dir,
                 SaveToAlbum = saveInAlbum,
-                CompressionQuality = 50,
-                
-
+                CompressionQuality = 10,
+                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                CustomPhotoSize =10,
             });
 
             md.PathGaleria = photo.AlbumPath;
