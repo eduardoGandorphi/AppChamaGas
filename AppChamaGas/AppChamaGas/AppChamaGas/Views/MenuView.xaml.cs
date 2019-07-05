@@ -50,6 +50,18 @@ namespace AppChamaGas.Views
                 Icone = Font_Index.list,
                 PaginaView = typeof(PedidosView)
             });
+            paginas.Add(new Pagina
+            {
+                Titulo = "Galeria",
+                Icone = Font_Index.list,
+                PaginaView = typeof(GaleriaView)
+            });
+            //paginas.Add(new Pagina
+            //{
+            //    Titulo = "Ajuda",
+            //    Icone = Font_Index.list,
+            //    PaginaView = typeof(IntroducaoView)
+            //});
             /*
             paginas.Add(new Pagina
             {
@@ -113,6 +125,19 @@ namespace AppChamaGas.Views
                 //vFoto.Source = ImageSource.FromStream(() =>                    
                 //);
             }
+        }
+
+        private void GesSair_Tapped(object sender, EventArgs e)
+        {
+            //Finaliza a secao do usuario
+            Barrel.Current.Empty("pessoa");
+            //Fechar o aplicativo
+            App.Current.Quit();
+        }
+
+        private void GesExibir_Tapped(object sender, EventArgs e)
+        {
+            this.Navigation.PushModalAsync(new AjudaView());
         }
     }
 }

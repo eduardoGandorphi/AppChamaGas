@@ -4,7 +4,7 @@
              xmlns:c="clr-namespace:AppChamaGas.Components"
              x:Class="AppChamaGas.Views.MenuView">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout >
             <StackLayout Orientation="Horizontal">
                 <Image x:Name="vFoto"
                        Aspect="AspectFill"
@@ -30,6 +30,29 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Label x:Name="lblAjuda"
+                   Text="Ajuda"
+                   Margin="8"
+                   VerticalOptions="End"
+                   BackgroundColor="#dcdcdc">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="gesExibir"
+                                          Tapped="GesExibir_Tapped"
+                                          NumberOfTapsRequired="2"/>   
+                </Label.GestureRecognizers>
+            </Label>
+            <Label x:Name="lblSair"
+                   Text="Sair"
+                   Margin="8"
+                   VerticalOptions="End"
+                   BackgroundColor="#dcdcdc">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="gesSair"
+                                          Tapped="GesSair_Tapped"
+                                          NumberOfTapsRequired="2"/>
+
+                </Label.GestureRecognizers>                
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

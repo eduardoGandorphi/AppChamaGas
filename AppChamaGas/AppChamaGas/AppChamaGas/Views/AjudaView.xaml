@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppChamaGas.Views.AjudaView">
+    <ContentPage.Content>
+        <ScrollView Orientation="Both">
+            <FlexLayout>
+                <Frame WidthRequest="300"
+                   HeightRequest="400">
+                    <FlexLayout Direction="Column">
+                        <Image Source="https://picsum.photos/200/300"
+                               Aspect="AspectFill"/>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Titulo" FontSize="Large" />
+                                    <Span Text="Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Diuretics paradis num copo é motivis de denguis. A ordem dos tratores não altera o pão duris. Cevadis im ampola pa arma uma pindureta. " FontSize="Default" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </FlexLayout>
+                </Frame>
+
+                <Frame WidthRequest="300"
+                   HeightRequest="400">
+                    <FlexLayout Direction="Column">
+                        <Image Source="https://picsum.photos/200/300"
+                               Aspect="AspectFill"/>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Titulo" FontSize="Large" />
+                                    <Span Text="Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Diuretics paradis num copo é motivis de denguis. A ordem dos tratores não altera o pão duris. Cevadis im ampola pa arma uma pindureta. " FontSize="Default" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </FlexLayout>
+                </Frame>
+
+                <Frame WidthRequest="300"
+                   HeightRequest="400">
+                    <FlexLayout Direction="Column">
+                        <Image Source="https://picsum.photos/200/300"
+                               Aspect="AspectFill"/>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Titulo" FontSize="Large" />
+                                    <Span Text="Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis. Diuretics paradis num copo é motivis de denguis. A ordem dos tratores não altera o pão duris. Cevadis im ampola pa arma uma pindureta. " FontSize="Default" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Button x:Name="btnVoltar"
+                            Text="Voltar" 
+                            Clicked="BtnVoltar_Clicked"/>
+                    </FlexLayout>
+                </Frame> 
+            </FlexLayout>
+        </ScrollView>    
+    </ContentPage.Content>
+</ContentPage>
