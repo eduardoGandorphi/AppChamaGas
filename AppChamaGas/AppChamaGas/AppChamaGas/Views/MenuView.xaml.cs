@@ -1,4 +1,5 @@
-﻿using AppChamaGas.Helpers;
+﻿using AppChamaGas.Extensions;
+using AppChamaGas.Helpers;
 using AppChamaGas.Models;
 using MonkeyCache.SQLite;
 using System;
@@ -120,9 +121,9 @@ namespace AppChamaGas.Views
             {
                 vNome.Text = pessoa.RazaoSocial;
                 vEmail.Text = pessoa.Email;
-                Uri uri = new Uri(@"https://picsum.photos/200/300");
-                vFoto.Source = ImageSource.FromUri(uri);
-                //vFoto.Source = ImageSource.FromStream(() =>                    
+                pessoa.FotoSource = pessoa.FotoByte.ToImageSource();
+                vFoto.Source = pessoa.FotoSource;
+                    //vFoto.Source = ImageSource.FromStream(() =>                    
                 //);
             }
         }
@@ -132,7 +133,8 @@ namespace AppChamaGas.Views
             //Finaliza a secao do usuario
             Barrel.Current.Empty("pessoa");
             //Fechar o aplicativo
-            App.Current.Quit();
+            //App.Current.Quit();
+            App.Current.MainPage = new LoginView();
         }
 
         private void GesExibir_Tapped(object sender, EventArgs e)

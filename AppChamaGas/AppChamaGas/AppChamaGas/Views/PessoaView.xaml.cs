@@ -1,4 +1,6 @@
-﻿using AppChamaGas.Models;
+﻿using AppChamaGas.Extensions;
+using AppChamaGas.Helpers;
+using AppChamaGas.Models;
 using AppChamaGas.Services;
 using AppChamaGas.Services.Azure;
 using MonkeyCache.SQLite;
@@ -17,32 +19,35 @@ namespace AppChamaGas.Views
     public partial class PessoaView : ContentPage
     {
         //Servicos do Azure
-        PessoaAzureService pessoaAzureServico;
+        PessoaAzureService pessoaAzureServico = new PessoaAzureService();
         Pessoa pessoa;
-       
         Base_Service client_cep = new Base_Service(Base_Service.URL_VIACEP);
         ReqRes_Service client_ReqRes_user = new ReqRes_Service("users");
-        ReqRes_Service client_ReqRes_register = 
+        ReqRes_Service client_ReqRes_register =
             new ReqRes_Service("register");
-        
+
         //      Base_Service client_api = new Base_Service(Base_Service.URL_MINHAAPI);
         User_ReqRes md = new User_ReqRes();
 
+        Pessoa PessoaBC { get { return (Pessoa)BindingContext; } }
         //Metodo construtor vai receber como parametro uma pessoa
-        public PessoaView(Pessoa usuario=null)
+        public PessoaView(Pessoa usuario = null)
         {
             InitializeComponent();
-            pessoaAzureServico = new PessoaAzureService();
-            if (usuario == null || string.IsNullOrEmpty(usuario.Id))
-            {
-                usuario = Barrel.Current.Get<Pessoa>("pessoa");
-            }
-            pessoa = usuario;
-            this.BindingContext = pessoa;
             ListarTipo();
 
+            if (usuario == null || string.IsNullOrEmpty(usuario.Id))
+                usuario = Barrel.Current.Get<Pessoa>("pessoa");
+
+            if (usuario == null)
+                usuario = new Pessoa();
+
+            pessoa = usuario;
+            this.BindingContext = pessoa;
+
+            pessoa.FotoSource = pessoa.FotoByte.ToImageSource();
             imgFoto.Source = pessoa.FotoSource;
-            picTipo.SelectedItem = pessoa.Tipo;
+
         }
 
         private async void EtCep_Unfocused(object sender, FocusEventArgs e)
@@ -73,7 +78,7 @@ namespace AppChamaGas.Views
 
             var usuarioEntrada = new Usuario
             {
-                email= "Xeve.holt@reqres.in",
+                email = "Xeve.holt@reqres.in",
                 password = "pistol"
             };
 
@@ -97,7 +102,7 @@ namespace AppChamaGas.Views
             catch (Exception ex)
             {
                 await this.DisplayAlert("Erro", ex.Message, "OK");
-            }           
+            }
 
         }
 
@@ -116,7 +121,7 @@ namespace AppChamaGas.Views
                 await DisplayAlert("Atenção", "Não foi possivel salvar o registro", "Fechar");
             }
             vCarregando.IsVisible = false;
-            vCarregando.IsRunning = false;            
+            vCarregando.IsRunning = false;
         }
 
         private async Task<bool> SalvarAsync()
@@ -144,7 +149,7 @@ namespace AppChamaGas.Views
             }
             else
             {
-                Barrel.Current.Empty("pessoa");                
+                Barrel.Current.Empty("pessoa");
                 Barrel.Current.Add("pessoa", pessoa, TimeSpan.FromMinutes(1));
                 return await pessoaAzureServico.AlterarAsync(pessoa);
             }
@@ -157,6 +162,19 @@ namespace AppChamaGas.Views
             tipos.Add("Distribuidor");
             picTipo.ItemsSource = tipos;
             picTipo.SelectedIndex = 0;
+        }
+
+        private async void BtnFoto_Clicked(object sender, EventArgs e)
+        {
+
+            Foto_MD md = await Photo.TiraFoto();
+
+            if (md == null)
+                return;
+
+            this.imgFoto.Source = md.fotoArray.ToImageSource();
+            PessoaBC.FotoByte = md.fotoArray;
+            
         }
     }
 }

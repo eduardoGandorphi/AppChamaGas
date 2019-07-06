@@ -20,12 +20,13 @@
                                        x:Name="imgFoto"   Source="{Binding FotoSource}" 
                                        Aspect="Fill"/>
 
-                                <components:Btn_Icon Text="{Binding TextoBotaoFoto}" 
+                                <components:Btn_Icon x:Name="btnFoto" 
+                                                    Text="{Binding TextoBotaoFoto}" 
                                                      BackgroundColor="Transparent"
                                                      HorizontalOptions="End" VerticalOptions="End"
                                                      FontSize="30"
                                                      TextColor="Gray"
-                                                     Command="{Binding TiraFotoCommand}"/>
+                                                     Clicked="BtnFoto_Clicked"/>
                             </StackLayout>
                         </ViewCell>
                         <EntryCell x:Name="etRazaoSocial" 

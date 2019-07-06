@@ -85,16 +85,12 @@ namespace AppChamaGas.Models
         {
             get { return imageVisivel; }
             set { SetProperty(ref imageVisivel, value); }
-        }
-
-        [JsonIgnore]
-        public Command TiraFotoCommand { get; set; }
+        }       
 
         [JsonIgnore]
         public string TextoBotaoFoto { get; set; }
         public Pessoa()
         {
-            TiraFotoCommand = new Command(TiraFoto);
 
             BotaoVisivel = true;
             ImageVisivel = false;
@@ -102,16 +98,7 @@ namespace AppChamaGas.Models
             TextoBotaoFoto = Font_Index.camera;
         }
 
-        public async void TiraFoto()
-        {
-            Foto_MD md = await Photo.TiraFoto();
 
-            BotaoVisivel = false;
-            ImageVisivel = true;
-
-            this.FotoByte = md.fotoArray;
-
-        }
 
 
     }

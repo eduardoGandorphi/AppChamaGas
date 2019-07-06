@@ -1,4 +1,5 @@
-﻿using AppChamaGas.Helpers;
+﻿using AppChamaGas.Extensions;
+using AppChamaGas.Helpers;
 using AppChamaGas.Models;
 using AppChamaGas.Services.Azure;
 using MonkeyCache.SQLite;
@@ -45,6 +46,11 @@ namespace AppChamaGas.Views
         private async void BtnFoto_Clicked(object sender, EventArgs e)
         {
             var md = await Photo.TiraFoto("produto.jpg");
+
+            if (md == null)
+                return;
+
+            imgFoto.Source = md.fotoArray.ToImageSource();
             this.produtoBC.FotoByte = md.fotoArray;
         }
     }

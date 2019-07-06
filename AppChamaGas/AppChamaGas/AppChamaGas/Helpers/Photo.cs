@@ -25,6 +25,9 @@ namespace AppChamaGas.Helpers
                 CustomPhotoSize =10,
             });
 
+            if (photo == null)
+                return null;
+
             md.PathGaleria = photo.AlbumPath;
             md.PathInterno = photo.Path;
             md.fotoArray = photo.GetStream().ToByteArray();
