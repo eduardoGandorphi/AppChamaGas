@@ -7,7 +7,10 @@
         <StackLayout>
             <Label x:Name="lblTitulo" FontAttributes="Bold" FontSize="Large"
                    HorizontalOptions="Center" Margin="0,15"/>
-            <ListView x:Name="lvProdutos" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView x:Name="lvProdutos" 
+                      HasUnevenRows="True" 
+                      SeparatorVisibility="None"
+                      ItemTapped="LvProdutos_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -33,6 +36,15 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout x:Name="stkCarrinho" Orientation="Horizontal">
+                <Label Text="Carrinho" HorizontalOptions="StartAndExpand"/>
+                <Label  Text="{Binding TotalItens}"  HorizontalOptions ="Center"/>
+                <Label  Text="{Binding TotalPedido, StringFormat='{0:C2}'}"  HorizontalOptions ="Center"/>
+                 
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="stkCarrinho_Tapped"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

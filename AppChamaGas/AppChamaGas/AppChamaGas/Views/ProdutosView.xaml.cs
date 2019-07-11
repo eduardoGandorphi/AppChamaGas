@@ -5,6 +5,7 @@ using AppChamaGas.Services.Azure;
 using MonkeyCache.SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,9 +26,10 @@ namespace AppChamaGas.Views
         public ProdutosView()
         {
             InitializeComponent();
+            this.BindingContext = CarrinhoView.pedido;
 
             usuarioLogado = Barrel.Current.Get<Pessoa>("pessoa");
-
+            CarrinhoView.Itens.CollectionChanged += ColecaoAlterada;
 
         }
 
@@ -116,6 +118,31 @@ namespace AppChamaGas.Views
         private void AbrirTelaCadastroProduto()
         {
             Navigation.PushAsync(new ProdutoView());
+        }
+
+        private void LvProdutos_ItemTapped(object sender, ItemTappedEventArgs args)
+        {            
+            var prd = (Produto)args.Item;
+
+            string proximoId = (CarrinhoView.Itens.Count() + 1).ToString();
+
+            var it = new PedidoItens("", prd.Id, proximoId, 1, prd.Preco)
+            { DescricaoProduto = prd.Descricao };
+
+            
+            CarrinhoView.Itens.Add(it);
+            
+        }
+
+        private void ColecaoAlterada(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            CarrinhoView.pedido.TotalPedido =  CarrinhoView.Itens.Sum(p => p.ValorTotal);
+            CarrinhoView.pedido.TotalItens = CarrinhoView.Itens.Count();            
+        }
+
+        private void stkCarrinho_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CarrinhoView());
         }
     }
 }

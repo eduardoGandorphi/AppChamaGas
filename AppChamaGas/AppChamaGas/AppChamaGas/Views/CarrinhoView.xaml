@@ -4,9 +4,22 @@
              x:Class="AppChamaGas.Views.CarrinhoView">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label  Text="{Binding TotalPedido, StringFormat='{0:C2}'}"  HorizontalOptions ="Center"/>
+            <ListView x:Name="lvItens">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding DescricaoProduto}"/>
+                                <Button Text="-" Command="{Binding MenosCommand}"/>
+                                <Label Text="{Binding Quantidade}"/>
+                                <Button Text="+" Command="{Binding MaisCommand}"/>
+                                <Label Text="{Binding ValorTotal}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
