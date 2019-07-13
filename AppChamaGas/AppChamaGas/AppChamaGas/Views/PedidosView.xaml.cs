@@ -49,24 +49,11 @@ namespace AppChamaGas.Views
                 pedido.NomeFornecedor = pessoa.RazaoSocial;
 
                 var itensFiltrados = pedidosItens.Where(i => i.PedidoId == pedido.Id).ToList();
-                var total = itensFiltrados.Sum(i => i.ValorTotal);
-                pedido.ValorTotal = "R$" + total.ToString("C2");
-            }
+                var total = itensFiltrados.Sum(i => i.ValorTotal);            }
 
-            //lvPedidos.ItemsSource = pedidos;
+            lvPedidos.ItemsSource = pedidos;
 
-            lvPedidos.ItemsSource = new List<Pedido>
-            {
-                new Pedido("10","5")
-                {
-                    DataAgenda = DateTime.Now,
-                    DataEmissao= DateTime.Now,
-                    DataEntrega = DateTime.Now,
-                    Id = "1",
-                    NomeFornecedor = "João do Gás",
-                    ValorTotal = "R$67.45"                    
-                }
-            };
+         
 
         }
     }

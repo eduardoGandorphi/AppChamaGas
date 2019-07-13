@@ -16,8 +16,7 @@ namespace AppChamaGas.Models
         public DateTime DataAgenda { get; set; }
         public DateTime DataEntrega { get; set; }
 
-        [JsonIgnore, SQLite.Ignore]
-        public string ValorTotal { get; set; }
+
         [JsonIgnore, SQLite.Ignore]
         public string NomeFornecedor { get; set; }
 
@@ -44,6 +43,13 @@ namespace AppChamaGas.Models
             FornecedorId = fornecedorId;
             DataEmissao = DateTime.Now;
             DataAgenda = DateTime.Now.AddHours(3);
+        }
+
+
+        public event EventHandler DelegateAtualizadorLista;
+        public void AtualizarLista()
+        {
+            DelegateAtualizadorLista(this, new EventArgs());
         }
     }
 }

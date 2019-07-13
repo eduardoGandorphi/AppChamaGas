@@ -24,18 +24,22 @@ namespace AppChamaGas.Views
         Pessoa usuarioLogado;
         bool eh_Distribuidor;
         public ProdutosView()
-        {
+        {            
             InitializeComponent();
-            this.BindingContext = CarrinhoView.pedido;
-
             usuarioLogado = Barrel.Current.Get<Pessoa>("pessoa");
-            CarrinhoView.Itens.CollectionChanged += ColecaoAlterada;
-
         }
-
+        private void PopuleBindings()
+        {
+            CarrinhoView.pedido.DelegateAtualizadorLista += ColecaoAlterada;
+            this.BindingContext = CarrinhoView.pedido;
+            CarrinhoView.Itens.CollectionChanged += ColecaoAlterada;
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            if (string.IsNullOrEmpty(CarrinhoView.pedido.FornecedorId))
+                PopuleBindings();
+
             eh_Distribuidor = usuarioLogado.Tipo == "Distribuidor";
 
             if (eh_Distribuidor)
@@ -105,6 +109,8 @@ namespace AppChamaGas.Views
             //};
         }
 
+
+
         private void AdicionaBotaoNovoProduto()
         {
             if (this.ToolbarItems.Count == 0)
@@ -127,14 +133,15 @@ namespace AppChamaGas.Views
             string proximoId = (CarrinhoView.Itens.Count() + 1).ToString();
 
             var it = new PedidoItens("", prd.Id, proximoId, 1, prd.Preco)
-            { DescricaoProduto = prd.Descricao };
+            { DescricaoProduto = prd.Descricao,
+              PedidoPai = CarrinhoView.pedido};
 
             
             CarrinhoView.Itens.Add(it);
-            
+            CarrinhoView.pedido.FornecedorId = prd.FornecedorId;
         }
 
-        private void ColecaoAlterada(object sender, NotifyCollectionChangedEventArgs e)
+        private void ColecaoAlterada(object sender, EventArgs e)
         {
             CarrinhoView.pedido.TotalPedido =  CarrinhoView.Itens.Sum(p => p.ValorTotal);
             CarrinhoView.pedido.TotalItens = CarrinhoView.Itens.Count();            
@@ -143,6 +150,21 @@ namespace AppChamaGas.Views
         private void stkCarrinho_Tapped(object sender, EventArgs e)
         {
             Navigation.PushAsync(new CarrinhoView());
+        }
+
+        private void EtBusca_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.DisplayAlert("msg", "TEXTO ALTERADO", "ok");
+        }
+
+        private void EtBusca_Unfocused(object sender, FocusEventArgs e)
+        {
+            this.DisplayAlert("msg", "TEXTO DESFOCADO", "ok");
+        }
+
+        private void LvProdutos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            lvProdutos.SelectedItem = null;
         }
     }
 }

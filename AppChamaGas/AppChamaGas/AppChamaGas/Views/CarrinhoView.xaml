@@ -20,6 +20,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button x:Name="btnSalvarPedido" Text="Confirmar Compra" Clicked="BtnSalvarPedido_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

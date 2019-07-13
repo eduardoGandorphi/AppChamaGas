@@ -38,6 +38,8 @@ namespace AppChamaGas.Models
         [JsonIgnore]
         public string DescricaoProduto { get; set; }
 
+        [JsonIgnore]
+        public Pedido PedidoPai { get; set; }
         //Metodo construtor
         public PedidoItens(
             string pedidoId,
@@ -62,13 +64,21 @@ namespace AppChamaGas.Models
         }
         private void Menos()
         {
-            Quantidade -= 1;
-            ValorTotal = Quantidade * Preco;
+            if (Quantidade > 0)
+            {
+                Quantidade -= 1;
+                ValorTotal = Quantidade * Preco;
+
+
+                PedidoPai.AtualizarLista();
+            }
         }
         private void Mais()
         {
             Quantidade += 1;
             ValorTotal = Quantidade * Preco;
+
+            PedidoPai.AtualizarLista();
         }
     }
 }
