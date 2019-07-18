@@ -7,7 +7,8 @@
         <StackLayout>
             <Label Text="Meus Pedidos" Margin="0,10" FontAttributes="Bold" FontSize="Large"
                 VerticalOptions="Start"  HorizontalOptions="CenterAndExpand" />
-            <ListView x:Name="lvPedidos" HasUnevenRows="True" SeparatorVisibility="None">
+            <ListView x:Name="lvPedidos" HasUnevenRows="True" SeparatorVisibility="None"
+                      ItemTapped="LvPedidos_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

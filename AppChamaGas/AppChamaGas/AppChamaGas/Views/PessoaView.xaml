@@ -38,9 +38,13 @@
                     </TableSection>
                     <TableSection Title="Dados endereço">
                         <ViewCell>
-                            <Entry x:Name="etCep" 
+                            <!--<Entry x:Name="etCep" 
                                    Placeholder="cep" 
                                    Unfocused="EtCep_Unfocused"
+                                   Text="{Binding Cep}"/>-->
+                            <Entry x:Name="etCep" 
+                                   Placeholder="cep" 
+                                   TextChanged="EtCep_TextChanged"
                                    Text="{Binding Cep}"/>
                         </ViewCell>
                         <EntryCell x:Name="etLogradouro" 

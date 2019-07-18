@@ -16,9 +16,32 @@ namespace AppChamaGas.Models
         public DateTime DataAgenda { get; set; }
         public DateTime DataEntrega { get; set; }
 
+        [JsonIgnore, SQLite.Ignore]
+        public string Entrega
+        {
+            get
+            {
+                if (DataEntrega == DateTime.MinValue)
+                {
+                    return string.Empty;
+                }
+                return DataEntrega.ToString();
+            }
+            set
+            {
+                DataEntrega = DateTime.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+
 
         [JsonIgnore, SQLite.Ignore]
         public string NomeFornecedor { get; set; }
+
+        [JsonIgnore, SQLite.Ignore]
+        public string NomeCliente { get; set; }
+
+        [JsonIgnore, SQLite.Ignore]
+        public List<PedidoItens> listaItens { get; set; }
 
         private double totalPedido;
         [JsonIgnore]
@@ -43,6 +66,7 @@ namespace AppChamaGas.Models
             FornecedorId = fornecedorId;
             DataEmissao = DateTime.Now;
             DataAgenda = DateTime.Now.AddHours(3);
+            DataEntrega = DateTime.MinValue;
         }
 
 

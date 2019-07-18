@@ -176,5 +176,63 @@ namespace AppChamaGas.Views
             PessoaBC.FotoByte = md.fotoArray;
             
         }
+
+        private async void EtCep_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (etCep.Text.Length == 8)
+            {
+                var cep_ret = await client_cep.Get<CEP>(etCep.Text);
+
+                this.etCep.Text = cep_ret.cep;
+                this.etLogradouro.Text = cep_ret.Logradouro;
+                this.etComplemento.Text = cep_ret.Complemento;
+                this.etBairro.Text = cep_ret.Bairro;
+                this.etLocalidade.Text = cep_ret.Localidade;
+                this.etUf.Text = cep_ret.Uf;
+
+                //var pessoa_ret = await client_api.get<Pessoa>("");
+                //this.etPessoaNome.Text = pessoa_ret.Nome;
+                await client_ReqRes_user.Get<RetornoTeste>("2");
+
+                md.name = cep_ret.Bairro;
+                md.job = cep_ret.Localidade;
+
+                var retornoPost = await client_ReqRes_user.Post(md);
+
+                this.etUf.Text = $"{retornoPost.createdAt} {retornoPost.id}";
+
+                await this.DisplayAlert("meu retorno",
+                    $"{retornoPost.createdAt} {retornoPost.id}",
+                    "Entendi");
+
+                var usuarioEntrada = new Usuario
+                {
+                    email = "Xeve.holt@reqres.in",
+                    password = "pistol"
+                };
+
+
+                try
+                {
+                    var usuarioSaida = await client_ReqRes_register
+                    .Post<Usuario, Usuario>(usuarioEntrada);
+
+                    await this.DisplayAlert("usuarioSaida",
+                        $"{usuarioSaida.token}",
+                        "Entendi");
+
+                    var usuarioPut = await client_ReqRes_register
+                   .Post<Usuario, Usuario>(usuarioEntrada);
+
+                    await this.DisplayAlert("usuarioSaida",
+                        $"{usuarioPut.token}",
+                        "Entendi");
+                }
+                catch (Exception ex)
+                {
+                    await this.DisplayAlert("Erro", ex.Message, "OK");
+                }
+            }           
+        }
     }
 }
