@@ -46,7 +46,8 @@ namespace AppChamaGas.Views
                 item.DescricaoProduto = listaProdutos.Where(p => p.Id == item.ProdutoId)
                                             .FirstOrDefault().Descricao;
 
-            Navigation.PushAsync(new ConsultaPedidoView(ped));
+            //Navigation.PushAsync(new ConsultaPedidoView(ped));
+            Navigation.PushAsync(new WebViewPage(ped, ped.listaItens));
         }
         protected override async void OnAppearing()
         {

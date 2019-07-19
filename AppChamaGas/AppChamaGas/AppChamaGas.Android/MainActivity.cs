@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Xamarin.Essentials;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -23,6 +23,7 @@ namespace AppChamaGas.Droid
 
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+//            ExperimentalFeatures.Enable(ExperimentalFeatures.ShareFileRequest);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
