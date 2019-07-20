@@ -1,4 +1,5 @@
 ﻿using AppChamaGas.Helpers;
+using AppChamaGas.Interface;
 using AppChamaGas.Models;
 using Plugin.Share;
 using System;
@@ -27,10 +28,13 @@ namespace AppChamaGas.Views
         {
             return FileManager.Save(this.html);
         }       
-        public void btnShare_Clicked(object sender, EventArgs args)
+        public async void btnShare_Clicked(object sender, EventArgs args)
         {
             var caminho = SalvarArquivo();
             //CrossShare.Current.ShareLink("https://www.google.com");
+            var comp = DependencyService.Get<IShare>();
+
+            await comp.Share(caminho, this.html);
         }
 	}
 }

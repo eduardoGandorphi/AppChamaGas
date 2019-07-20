@@ -90,6 +90,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DependencyService\Share_IOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -179,4 +180,5 @@
       <Name>AppChamaGas</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
 </Project>
