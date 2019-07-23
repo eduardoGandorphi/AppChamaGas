@@ -23,6 +23,7 @@ namespace AppChamaGas
             //Remove data experidos
             Barrel.Current.EmptyExpired();
             MainPage = new LoginView();
+            //MainPage = new FlexPage();
         }
 
         protected override void OnStart()

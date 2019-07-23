@@ -10,7 +10,7 @@ namespace AppChamaGas.Helpers
         public static string Save(string content)
         { 
             //string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string settingsPath = Path.Combine("/mnt/sdcard/download", "relat.html");
             StreamWriter stream = File.CreateText(settingsPath);
             stream.Write(content);
